@@ -38,7 +38,6 @@ let verificaAdmin_Role = (req, res, next) => {
     
     }else{
 
-        console.log(usuario.role);
         return res.json({
             ok: false,
             err: {

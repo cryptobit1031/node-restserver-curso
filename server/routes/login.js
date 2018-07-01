@@ -10,7 +10,7 @@ const { verificatoken } = require('../middlewares/autenticacion');
 
 const app = express();
 
-app.post('/login', verificatoken, (req,res) => {
+app.post('/login', (req,res) => {
 
     let body = req.body;
     // Utilizamos el fineOne por que nos interesa que traiga solo uno
