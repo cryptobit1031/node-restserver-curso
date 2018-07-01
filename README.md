@@ -8,4 +8,5 @@ Paquetes instalados
 ``   npm install bcrypt --save ``
 ``   npm install underscore --save ``
 ``   npm install jsonwebtoken --save ``
+``   npm install google-auth-library --save ``
 
