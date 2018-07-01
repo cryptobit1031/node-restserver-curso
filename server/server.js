@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-// referencia de usuario js y sus rutas
-app.use( require('./routes/usuario') );
+// referencia a configuracion global de rutas
+app.use( require('./routes/index') );
 
 
 mongoose.connect(process.env.URLDB,(err,res) =>{

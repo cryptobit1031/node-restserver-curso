@@ -7,4 +7,5 @@ Paquetes instalados
 ``   npm install mongoose-unique-validator --save ``
 ``   npm install bcrypt --save ``
 ``   npm install underscore --save ``
+``   npm install jsonwebtoken --save ``
 

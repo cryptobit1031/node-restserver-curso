@@ -7,17 +7,13 @@ const bcrypt = require('bcrypt');
 // ----------------------------------------------------------------------------------------------------------------------
 const _ =require('underscore');
 
-
+const Usuario = require('../models/usuario');
+const { verificatoken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 
 const app = express();
-const Usuario = require('../models/usuario');
 
-app.get('/usuario',(req,res) => {
 
-      let estadoUsuario = {
-          estado: true
-      }; 
-
+app.get('/usuario', verificatoken, (req,res) => {
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -52,7 +48,7 @@ app.get('/usuario',(req,res) => {
 
 
 
-app.post('/usuario',(req,res)=> {
+app.post('/usuario',[verificatoken, verificaAdmin_Role], (req,res)=> {
 
     let body = req.body;
 
@@ -85,10 +81,10 @@ app.post('/usuario',(req,res)=> {
 // ----------------------------------------------------------------------------------------------------------------------
 // Actualizacion de rtegistros
 // ----------------------------------------------------------------------------------------------------------------------
-app.put('/usuario/:id',(req,res)=> {
+app.put('/usuario/:id', [verificatoken, verificaAdmin_Role], (req,res)=> {
 
     let id = req.params.id;
-   
+    
 // ----------------------------------------------------------------------------------------------------------------------
 // Pick regresa una copia del objeto filtrando solo los valores que yo quiero --> npm install underscore
 // ----------------------------------------------------------------------------------------------------------------------
@@ -111,15 +107,16 @@ app.put('/usuario/:id',(req,res)=> {
 
             res.json({
                 ok: true,
-                usuario            
+                usuarioDB            
 
         });
 
     }); 
 
 });
+
 // ----------------------------------------------------------------------------------------------------------------------
-app.delete('/usuario/:id',(req,res) => {
+app.delete('/usuario/:id', verificatoken, (req,res) => {
 
 // ----------------------------------------------------------------------------------------------------------------------
 // De esta forma mofificamos el registro de estado
