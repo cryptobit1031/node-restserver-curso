@@ -188,12 +188,10 @@ app.put('/producto/:id', verificatoken, (req,res) => {
         };
 
         if(!productoDB){
-           
             return res.status(400).json({
                 ok: false,
                 err: { message: 'EL ID no existe'}
             });
-
         };
 
         productoDB.nombre = body.nombre;
@@ -205,19 +203,15 @@ app.put('/producto/:id', verificatoken, (req,res) => {
         productoDB.save( (err, productoGuardado) => {
 
             if (err) {
-
                 return res.status(500).json({
                     ok: false,
                     err
                 });
-
             }
 
             res.json({
-            
                 ok: true,
                 producto: productoGuardado            
-    
             });
 
         });

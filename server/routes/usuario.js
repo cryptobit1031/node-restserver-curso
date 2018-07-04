@@ -148,40 +148,6 @@ app.delete('/usuario/:id', verificatoken, (req,res) => {
         });
     });
 
-/*
-// ----------------------------------------------------------------------------------------------------------------------
-// De esta forma borramos físicamente un registro
-// ----------------------------------------------------------------------------------------------------------------------
-
-    let id = req.params.id;
-
-    Usuario.findByIdAndRemove(id,(err, usuarioBorrado) => {
-       
-        if(err){
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        };
-
-        if(!usuarioBorrado){
-            return res.status(400).json({
-                ok: false,
-                err: {
-                    message: 'Usuario no encontrado'
-                }
-            });
-        };
-
-
-        res.json({
-            ok: true,
-            usuario: usuarioBorrado
-        });
-
-    });
-    */
-
 });
 
 

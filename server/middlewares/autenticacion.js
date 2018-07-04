@@ -27,6 +27,30 @@ let verificatoken = (req, res, next) => {
 
 };
 
+// ------------------------------------------------------------------------------------------------
+// Verifica token: implemetamos un middleware peromalizado para verificar el token cuando una imagen
+//                 sea llamada desde una url.
+// ------------------------------------------------------------------------------------------------
+let verificatokenImgUrl = (req, res, next) => {
+
+    let token = req.query.token;
+
+    jwt.verify( token, process.env.SEED, (err, decoded) => {
+
+        if ( err ) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token no es válido'
+                }
+            });
+        }
+
+        req.usuario = decoded.usuario;
+        next();
+
+    });
+};
 
 let verificaAdmin_Role = (req, res, next) => {
 
@@ -45,11 +69,12 @@ let verificaAdmin_Role = (req, res, next) => {
             }
         });    
 
-    }  
+    };  
 
 };
 
 module.exports = {
     verificatoken,
-    verificaAdmin_Role
+    verificaAdmin_Role,
+    verificatokenImgUrl
 }
